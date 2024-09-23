@@ -4,7 +4,7 @@ from typing import Optional
 
 from utils import INPUT_DIR
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 _FREQUENCY_CHANGES_FILE_NAME: Path = INPUT_DIR / 'day_1.txt'
 
@@ -13,11 +13,12 @@ def read_frequency_changes() -> list[int]:
     """
     Reads frequency changes from the input file and returns them as a list of integers.
 
+    Returns:
+        list[int]: A list of integer frequency changes.
+
     Raises:
         OSError: If the file cannot be opened or read.
 
-    Returns:
-        list[int]: A list of integer frequency changes.
     """
     frequency_changes = list[int]()
 
@@ -26,7 +27,7 @@ def read_frequency_changes() -> list[int]:
             for line in frequency_changes_file:
                 frequency_changes.append(int(line))
     except OSError as error:
-        logger.error(error)
+        _logger.error(error)
         raise
 
     return frequency_changes
