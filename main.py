@@ -13,8 +13,8 @@ def main():
         logger.critical('Could not read the file of frequency changes.')
         return
 
-    final_frequency = day_1.apply_frequency_changes(frequency_changes)
-    print(final_frequency)
+    first_repeated_frequency = day_1.find_first_repeated_frequency(frequency_changes)
+    print(first_repeated_frequency)
 
 
 if __name__ == '__main__':
