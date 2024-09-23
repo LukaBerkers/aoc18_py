@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from typing import Optional
 
 from utils import INPUT_DIR
 
@@ -60,3 +61,47 @@ def count_box_ids_containing_a_letter_two_and_three_times(box_ids: list[str]) ->
             id_has_a_letter_three_times_count += 1
 
     return id_has_a_letter_two_times_count, id_has_a_letter_three_times_count
+
+
+def find_box_ids_that_differ_by_one_letter(box_ids: list[str]) -> Optional[str]:
+    """
+    Finds the common letters between two box IDs that differ by exactly one letter.
+
+    Args:
+        box_ids: A list of strings representing the box IDs.
+
+    Returns:
+        A string
+        containing the letters that are common between the two box IDs which differ by exactly one
+        letter at the same position.
+        If no such IDs are found, returns None.
+    """
+    for i, id1 in enumerate(box_ids):
+        for id2 in box_ids[i + 1:]:
+            equal_letters = _equal_letters_from_ids(id1, id2)
+
+            if len(equal_letters) == len(id1) - 1:
+                return equal_letters
+
+    return None
+
+
+def _equal_letters_from_ids(id1: str, id2: str) -> str:
+    """
+    Finds the equal letters at the same positions in two box IDs.
+
+    Args:
+        id1: The first box ID to be compared for equal letters.
+        id2: The second box ID to be compared for equal letters.
+
+    Returns:
+        A string containing the letters from the input strings
+        that are equal at the same positions.
+    """
+    equal_letters = ''
+
+    for letter1, letter2 in zip(id1, id2):
+        if letter1 == letter2:
+            equal_letters += letter1
+
+    return equal_letters

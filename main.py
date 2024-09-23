@@ -15,15 +15,11 @@ def main():
         _logger.critical('Could not open or read the file containing the box IDs.')
         return
 
-    counts = day_2.count_box_ids_containing_a_letter_two_and_three_times(box_ids)
-    id_has_a_letter_two_times_count, id_has_a_letter_three_times_count = counts
-    _logger.info(
-        f'Number of IDs containing a letter twice: {id_has_a_letter_two_times_count}'
-    )
-    _logger.info(
-        f'Number of IDs containing a letter three times: {id_has_a_letter_three_times_count}'
-    )
-    print(f'Checksum: {id_has_a_letter_two_times_count * id_has_a_letter_three_times_count}')
+    equal_letters = day_2.find_box_ids_that_differ_by_one_letter(box_ids)
+    if equal_letters:
+        print(f'The common letters are: {equal_letters}.')
+    else:
+        print('No box ids found that only differ by one letter.')
 
 
 if __name__ == '__main__':
