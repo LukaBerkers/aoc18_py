@@ -1,0 +1,12 @@
+strict digraph 15 {
+    ranksep="1.0";
+    node[shape="box",style="rounded",fontname="FiraCode Nerd Font"];
+    edge[fontname="FiraCode Nerd Font"];
+    1[label="if frequencies_encountered is None:",style="rounded, bold"];
+    2[label="for frequency_change in frequency_changes:"];
+    4[label="return find_first_repeated_frequency(...)"];
+    1[label="if frequencies_encountered is None:",style="rounded, bold"];
+    1 -> 2 [label="False",color=red4,fontcolor=red4];
+    2 -> 4 [label="StopIteration",color=red4,fontcolor=red4];
+    4 -> 1 ;
+}

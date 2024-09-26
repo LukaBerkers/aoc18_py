@@ -1,0 +1,12 @@
+strict digraph 5 {
+    ranksep="1.0";
+    node[shape="box",style="rounded",fontname="FiraCode Nerd Font"];
+    edge[fontname="FiraCode Nerd Font"];
+    6[label="frequencies_encountered.add(...)"];
+    2[label="for frequency_change in frequency_changes:"];
+    5[label="current_frequency += frequency_change\l\lif current_frequency in frequencies_encountered:\l"];
+    7[label="return current_frequency",style="diagonals"];
+    6 -> 2 ;
+    2 -> 5 [color=green4,fontcolor=green4];
+    5 -> 7 [label="True",color=green4,fontcolor=green4];
+}
