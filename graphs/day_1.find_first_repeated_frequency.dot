@@ -3,7 +3,7 @@ strict digraph {
     node [shape="box" style="rounded" fontname="FiraCode Nerd Font"];
     edge [fontname="FiraCode Nerd Font"];
 
-    1 [label="if frequencies_encountered is None:"][style="rounded, bold"];
+    1 [label="if frequencies_encountered is None or not frequencies_encountered:"][style="rounded, bold"];
     1 -> 2 [label="False"][color=red4 fontcolor=red4];
     1 -> 3 [label="True"][color=green4 fontcolor=green4];
 

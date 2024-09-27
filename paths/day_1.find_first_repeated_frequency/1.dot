@@ -3,7 +3,7 @@ strict digraph 1 {
     node[shape="box",style="rounded",fontname="FiraCode Nerd Font"];
     edge[fontname="FiraCode Nerd Font"];
     4[label="return find_first_repeated_frequency(...)"];
-    1[label="if frequencies_encountered is None:",style="rounded, bold"];
+    1[label="if frequencies_encountered is None or not frequencies_encountered:",style="rounded, bold"];
     3[label="frequencies_encountered = {current_frequency}"];
     2[label="for frequency_change in frequency_changes:"];
     5[label="current_frequency += frequency_change\l\lif current_frequency in frequencies_encountered:\l"];

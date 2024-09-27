@@ -4,7 +4,7 @@ strict digraph 8 {
     edge[fontname="FiraCode Nerd Font"];
     2[label="for frequency_change in frequency_changes:"];
     4[label="return find_first_repeated_frequency(...)"];
-    1[label="if frequencies_encountered is None:",style="rounded, bold"];
+    1[label="if frequencies_encountered is None or not frequencies_encountered:",style="rounded, bold"];
     3[label="frequencies_encountered = {current_frequency}"];
     2[label="for frequency_change in frequency_changes:"];
     2 -> 4 [label="StopIteration",color=red4,fontcolor=red4];

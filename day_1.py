@@ -88,7 +88,7 @@ def find_first_repeated_frequency(
     Raises:
         RecursionError: If the list of frequency changes never generates a repeated frequency.
     """
-    if frequencies_encountered is None:
+    if frequencies_encountered is None or not frequencies_encountered:
         frequencies_encountered = {current_frequency}
 
     for frequency_change in frequency_changes:
