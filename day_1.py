@@ -73,7 +73,7 @@ def find_first_repeated_frequency(
     This function keeps
     applying the list of frequency changes until a repeated frequency is encountered.
     If the list of frequency changes never generates a repeated frequency,
-    this function will loop forever.
+    this function will recurse until the recursion depth limit is reached.
 
     Args:
         frequency_changes: List of integers representing changes in frequency.
@@ -84,6 +84,9 @@ def find_first_repeated_frequency(
 
     Returns:
         The first frequency value that is reached twice.
+
+    Raises:
+        RecursionError: If the list of frequency changes never generates a repeated frequency.
     """
     if frequencies_encountered is None:
         frequencies_encountered = {current_frequency}
