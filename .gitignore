@@ -165,5 +165,5 @@ cython_debug/
 input/
 
 # Testing path images
-graphs/*.png
-paths/**/*.png
+tests/graphs/*.png
+tests/paths/**/*.png
