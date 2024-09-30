@@ -23,6 +23,37 @@ import day_1
 
 
 class TestFindFirstRepeatedFrequency(unittest.TestCase):
+    # pp 0, 1, 2: infeasible
+
+    # pp 3
+    @given(st.integers(), st.sets(st.integers()), st.integers(), st.integers())
+    def test_terminates_after_recursing_when_frequency_has_already_been_encountered(
+            self,
+            current_frequency: int,
+            frequencies_encountered: set[int],
+            first_frequency_change: int,
+            second_frequency_change: int
+    ):
+        # Arrange
+        after_first_frequency_change = current_frequency + first_frequency_change
+        after_second_frequency_change = after_first_frequency_change + second_frequency_change
+        after_third_frequency_change = after_second_frequency_change + first_frequency_change
+        assume(after_first_frequency_change != after_second_frequency_change)
+        assume(after_first_frequency_change != after_third_frequency_change)
+        assume(after_second_frequency_change != after_third_frequency_change)
+        frequency_changes = [first_frequency_change, second_frequency_change]
+        frequencies_encountered.discard(after_first_frequency_change)
+        frequencies_encountered.discard(after_second_frequency_change)
+        frequencies_encountered.add(after_third_frequency_change)
+
+        # Act
+        result = day_1.find_first_repeated_frequency(
+            frequency_changes, current_frequency, frequencies_encountered
+        )
+
+        # Assert
+        self.assertEqual(after_third_frequency_change, result)
+
     # pp 4
     @given(st.integers(), st.sets(st.integers()), st.integers(), st.integers())
     def test_keeps_applying_frequency_changes_after_list_has_been_exhausted(
