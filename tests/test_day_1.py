@@ -23,6 +23,67 @@ import day_1
 
 
 class TestFindFirstRepeatedFrequency(unittest.TestCase):
+    # pp 4
+    @given(st.integers(), st.sets(st.integers()), st.integers(), st.integers())
+    def test_keeps_applying_frequency_changes_after_list_has_been_exhausted(
+            self,
+            current_frequency: int,
+            frequencies_encountered: set[int],
+            first_frequency_change: int,
+            second_frequency_change: int
+    ):
+        # Arrange
+        after_first_frequency_change = current_frequency + first_frequency_change
+        after_second_frequency_change = after_first_frequency_change + second_frequency_change
+        after_third_frequency_change = after_second_frequency_change + first_frequency_change
+        after_fourth_frequency_change = after_third_frequency_change + second_frequency_change
+        all_frequencies_to_be_encountered = [after_first_frequency_change,
+                                             after_second_frequency_change,
+                                             after_third_frequency_change,
+                                             after_fourth_frequency_change]
+        # Assume they are all different.
+        assume(
+            len(all_frequencies_to_be_encountered) == len(set(all_frequencies_to_be_encountered))
+        )
+        frequency_changes = [first_frequency_change, second_frequency_change]
+        frequencies_encountered.discard(after_first_frequency_change)
+        frequencies_encountered.discard(after_second_frequency_change)
+        frequencies_encountered.discard(after_third_frequency_change)
+        frequencies_encountered.add(after_fourth_frequency_change)
+
+        # Act
+        result = day_1.find_first_repeated_frequency(
+            frequency_changes, current_frequency, frequencies_encountered
+        )
+
+        # Assert
+        self.assertEqual(after_fourth_frequency_change, result)
+
+    # pp 5
+    @given(st.integers(), st.sets(st.integers()), st.integers(), st.integers())
+    def test_terminates_when_frequency_has_already_been_encountered(
+            self,
+            current_frequency: int,
+            frequencies_encountered: set[int],
+            first_frequency_change: int,
+            second_frequency_change: int
+    ):
+        # Arrange
+        after_first_frequency_change = current_frequency + first_frequency_change
+        after_second_frequency_change = after_first_frequency_change + second_frequency_change
+        assume(after_first_frequency_change != after_second_frequency_change)
+        frequency_changes = [first_frequency_change, second_frequency_change]
+        frequencies_encountered.discard(after_first_frequency_change)
+        frequencies_encountered.add(after_second_frequency_change)
+
+        # Act
+        result = day_1.find_first_repeated_frequency(
+            frequency_changes, current_frequency, frequencies_encountered
+        )
+
+        # Assert
+        self.assertEqual(after_second_frequency_change, result)
+
     # pp 6, 7, 8, 9
     @given(st.integers(), st.one_of(st.sets(st.integers(), max_size=0), st.none()))
     def test_without_frequencies_encountered_no_frequency_changes_reaches_recursion_limit(
