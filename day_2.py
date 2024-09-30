@@ -18,11 +18,12 @@ import logging
 from pathlib import Path
 from typing import Optional
 
+import utils
 from utils import INPUT_DIR
 
 _logger = logging.getLogger(__name__)
 
-_BOX_IDS_FILE_NAME: Path = INPUT_DIR / 'day_2.txt'
+_BOX_IDS_FILE_PATH: Path = INPUT_DIR / 'day_2.txt'
 
 
 def read_box_ids() -> list[str]:
@@ -35,17 +36,7 @@ def read_box_ids() -> list[str]:
     Raises:
         OSError: If the file cannot be opened or read.
     """
-    box_ids = list[str]()
-
-    try:
-        with _BOX_IDS_FILE_NAME.open() as box_ids_file:
-            for line in box_ids_file:
-                box_ids.append(line.strip())
-    except OSError as error:
-        _logger.error(error)
-        raise
-
-    return box_ids
+    return utils.read_input_file(_BOX_IDS_FILE_PATH, lambda s: s.strip())
 
 
 def count_box_ids_containing_a_letter_two_and_three_times(box_ids: list[str]) -> tuple[int, int]:

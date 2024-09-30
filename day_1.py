@@ -18,11 +18,12 @@ import logging
 from pathlib import Path
 from typing import Optional
 
+import utils
 from utils import INPUT_DIR
 
 _logger = logging.getLogger(__name__)
 
-_FREQUENCY_CHANGES_FILE_NAME: Path = INPUT_DIR / 'day_1.txt'
+_FREQUENCY_CHANGES_FILE_PATH: Path = INPUT_DIR / 'day_1.txt'
 
 
 def read_frequency_changes() -> list[int]:
@@ -36,17 +37,7 @@ def read_frequency_changes() -> list[int]:
         OSError: If the file cannot be opened or read.
 
     """
-    frequency_changes = list[int]()
-
-    try:
-        with _FREQUENCY_CHANGES_FILE_NAME.open() as frequency_changes_file:
-            for line in frequency_changes_file:
-                frequency_changes.append(int(line))
-    except OSError as error:
-        _logger.error(error)
-        raise
-
-    return frequency_changes
+    return utils.read_input_file(_FREQUENCY_CHANGES_FILE_PATH, int)
 
 
 def apply_frequency_changes(frequency_changes: list[int]) -> int:
